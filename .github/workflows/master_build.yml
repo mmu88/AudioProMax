@@ -25,6 +25,7 @@ jobs:
         pip install pyinstaller
         
     - name: Build Professional Executable
+      shell: cmd  # <-- هذا هو الحل
       run: |
         pyinstaller --noconfirm --onefile --windowed ^
           --add-data "src/ui/assets/*;ui/assets" ^
