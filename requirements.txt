@@ -1,0 +1,9 @@
+customtkinter==7.2.0
+mutagen==2.2.0
+pyinstaller==7.0.0
+python-dotenv==2.3.0
+soundfile==0.16.0
+numpy==1.26.5
+pydub==0.27.0
+requests==2.32.3
+pywin32==306
