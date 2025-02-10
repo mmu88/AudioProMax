@@ -1,0 +1,39 @@
+name: Ultimate Audio Build
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      
+    - name: Setup Python 3.12
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+        
+    - name: Install Dependencies
+      run: |
+        choco install ffmpeg -y
+        pip install -r requirements.txt
+        pip install pyinstaller
+        
+    - name: Build Professional Executable
+      run: |
+        pyinstaller --noconfirm --onefile --windowed ^
+          --add-data "src/ui/assets/*;ui/assets" ^
+          --icon=src/ui/assets/icon.ico ^
+          --name AudioMaster_Pro ^
+          src/ui/main_app.py
+          
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: AudioMaster-Pro
+        path: dist/
